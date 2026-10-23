@@ -1,0 +1,84 @@
+{
+  "mode": "readonly",
+  "allow": [
+    ["tail"],
+    ["head"],
+    ["cat"],
+    ["grep"],
+    ["less"],
+    ["journalctl"],
+    ["systemctl", "status"],
+    ["systemctl", "list-units"],
+    ["ps"],
+    ["df"],
+    ["du"],
+    ["free"],
+    ["uptime"],
+    ["uname"],
+    ["ls"],
+    ["stat"],
+    ["who"],
+    ["last"],
+    ["ss"],
+    ["netstat"],
+    ["ip", "addr"],
+    ["dmesg"],
+    ["docker", "ps"],
+    ["docker", "logs"]
+  ],
+  "deny": [
+    ["rm"],
+    ["shutdown"],
+    ["reboot"],
+    ["mkfs"],
+    ["dd"],
+    ["chmod"],
+    ["chown"],
+    ["sudo"],
+    ["su"],
+    ["curl"],
+    ["wget"],
+    ["nc"],
+    ["bash"],
+    ["sh"],
+    ["python"],
+    ["python3"],
+    ["perl"]
+  ],
+  "hosts": {
+    "intranet-01": {
+      "mode": "exec",
+      "allow": [
+        ["systemctl", "restart", "nginx"],
+        ["systemctl", "restart", "myapp"]
+      ]
+    },
+    "win-01": {
+      "mode": "exec",
+      "allow": [
+        ["hostname"],
+        ["whoami"],
+        ["ipconfig"],
+        ["netstat"],
+        ["tasklist"],
+        ["systeminfo"],
+        ["powershell.exe", "-NoProfile", "-NonInteractive", "-Command", "Get-Content*"],
+        ["powershell.exe", "-NoProfile", "-NonInteractive", "-Command", "Get-Service*"],
+        ["powershell.exe", "-NoProfile", "-NonInteractive", "-Command", "Get-Process*"],
+        ["powershell.exe", "-NoProfile", "-NonInteractive", "-Command", "Get-ChildItem*"],
+        ["powershell.exe", "-NoProfile", "-NonInteractive", "-Command", "Get-WinEvent*"],
+        ["powershell.exe", "-NoProfile", "-NonInteractive", "-Command", "Get-Date*"],
+        ["powershell.exe", "-NoProfile", "-NonInteractive", "-Command", "Test-NetConnection*"]
+      ]
+    },
+    "jump-01": {
+      "mode": "exec",
+      "ssh": {
+        "key": "/var/lib/relay-agent/relay_jump",
+        "cidrs": ["10.20.30.0/24"],
+        "ports": [22],
+        "users": ["ops"]
+      }
+    }
+  }
+}

@@ -1,0 +1,45 @@
+# ---------------------------------------------------------------
+# 本地部署状态：里面的密钥、口令、真实公网 IP 永远不要提交
+# ---------------------------------------------------------------
+.deploy/
+.test/
+.toolchain/
+build/
+bin/
+
+# 编译产物 / 安装包（由 `make build` 重新生成）
+dist/*
+!dist/README.md
+!dist/install.sh
+!dist/install-agent.ps1
+!dist/start-agent.cmd
+!dist/start-ubuntu-jump.sh
+
+# 证书、私钥、令牌文件
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+id_ed25519*
+id_rsa*
+known_hosts*
+*.env
+!*.env.example
+secrets.env
+.secrets
+*secret*.env
+
+# 日志与审计
+*.log
+*.jsonl
+audit.json
+relay_jump*
+relay-agent-bundle.tar.gz
+
+# 编辑器 / 系统
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
